@@ -12,7 +12,7 @@ export class CodeActionsView extends EtchComponentBase<CodeActionsViewProperties
   render(): JSX.Element {
     return (
       <div>
-        { this.properties.Actions.map(action => <CodeActionView Action={action} />) }
+        { this.properties.Actions.map((action, index) => (<CodeActionView Action={action} Index={index} />)) }
       </div>
     );
   }

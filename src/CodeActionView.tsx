@@ -5,6 +5,7 @@ import { EtchComponentBase } from './EtchComponentBase';
 
 export interface CodeActionViewProperties {
   Action: CodeAction;
+  Index: number;
 }
 
 export class CodeActionView extends EtchComponentBase<CodeActionViewProperties> {
@@ -26,7 +27,7 @@ export class CodeActionView extends EtchComponentBase<CodeActionViewProperties> 
     if (this._title) {
       return (
         <div className={`CodeActionView`} onclick={this.properties.Action.apply}>
-          {this._title}
+          {this.properties.Index + 1}. {this._title}
         </div>
       );
     } else {
