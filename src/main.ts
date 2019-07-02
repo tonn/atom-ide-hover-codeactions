@@ -1,8 +1,11 @@
 import { CompositeDisposable } from 'atom';
 import { CodeActionProvider } from 'atom-ide';
 
+import { UI } from './linter';
+
 import { HoverProvidersRegistry } from './atom-ide-hover';
-import { CodeActionsProviderInstance } from './CodeActionsProvider';
+import { CodeActionsHoverProviderInstance } from './CodeActionsHoverProvider';
+import { LinterCodeActionsInstance } from './LinterCodeActions';
 
 class Main {
   config = {};
@@ -22,11 +25,15 @@ class Main {
   ConsumeHoverProvidersRegistry(hoverProvidersRegistry: HoverProvidersRegistry) {
     console.log('ConsumeHoverProvidersRegistry');
 
-    hoverProvidersRegistry.AddProvider(CodeActionsProviderInstance);
+    hoverProvidersRegistry.AddProvider(CodeActionsHoverProviderInstance);
   }
 
   ConsumeCodeActionProvider(codeActionProvider: CodeActionProvider) {
-    CodeActionsProviderInstance.CodeActionProvider = codeActionProvider;
+    CodeActionsHoverProviderInstance.AddCodeActionProvider(codeActionProvider);
+  }
+
+  ProviderLinterUI(): UI {
+    return LinterCodeActionsInstance;
   }
 }
 
